@@ -2,6 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.api.routes_ocr import router as ocr_router
+from backend.api import routes_health
 
 app = FastAPI(title="Document AI API")
 
@@ -12,7 +13,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(ocr_router, prefix="/api", tags=["ocr"])
+app.include_router(ocr_router, prefix="/api", tags=["Analyze"])
+app.include_router(routes_health.router, prefix="/api", tags=["Health Checks"])
 
 if __name__ == "__main__":
     import uvicorn
