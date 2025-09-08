@@ -1,1 +1,3 @@
 venv/
+dummy.json
+__pycache__/
