@@ -18,6 +18,7 @@ pandas = "^2.3.2"
 matplotlib = "^3.10.6"
 tqdm = "^4.67.1"
 seaborn = "^0.13.2"
+dotenv = "^0.9.9"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.0.0"

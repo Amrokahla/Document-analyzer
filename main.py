@@ -1,8 +1,11 @@
 import logging
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from backend.core.logging_config import configure_logging
 from backend.api import routes_ocr, routes_health
+from backend.core.error_handlers import add_exception_handlers
+from backend.core.logging_config import configure_logging
+
+
 
 
 configure_logging()
@@ -17,6 +20,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+add_exception_handlers(app)
 
 @app.on_event("startup")
 async def startup_event():

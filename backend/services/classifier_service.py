@@ -1,13 +1,16 @@
 import os
 import pickle
 import logging
+from backend.core.config import settings
+
+
 
 logger = logging.getLogger(__name__)
 
 # Paths (relative to project root)
-MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "model")
-MODEL_PATH = os.path.join(MODEL_DIR, "classifier_model.pkl")
-VEC_PATH = os.path.join(MODEL_DIR, "vectorizer.pkl")
+MODEL_DIR = settings.model_dir
+MODEL_PATH = os.path.join(MODEL_DIR, settings.classifier_model)
+VEC_PATH = os.path.join(MODEL_DIR, settings.vectorizer)
 
 # Load model & vectorizer at import time
 try:
