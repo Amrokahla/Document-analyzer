@@ -1,0 +1,11 @@
+services:
+  document-ai:
+    build: .
+    container_name: document-ai
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app  # mount local project into container (dev mode)
+    environment:
+      - LOG_LEVEL=INFO
+      - PYTHONUNBUFFERED=1
