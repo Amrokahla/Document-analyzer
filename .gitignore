@@ -1,6 +1,32 @@
-venv/
-dummy.json
+# Ignore Python cache
 __pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+.venv/
+env/
+venv/
+
+# Ignore local configs
+*.env
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore build artifacts
+*.egg-info/
+dist/
+build/
+
+# Git files
+.git/
+.gitignore
+
+
+# Ignore data
 data/
-logs/
-.env

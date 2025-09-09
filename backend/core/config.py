@@ -1,6 +1,6 @@
 # backend/core/config.py
 import os
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
 # Load .env file if present
