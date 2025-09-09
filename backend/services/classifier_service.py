@@ -1,18 +1,41 @@
 import os
 import pickle
+import logging
 
+logger = logging.getLogger(__name__)
+
+# Paths (relative to project root)
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "model")
-MODEL_PATH = os.path.join(MODEL_DIR, "trained_model.pkl")
+MODEL_PATH = os.path.join(MODEL_DIR, "classifier_model.pkl")
 VEC_PATH = os.path.join(MODEL_DIR, "vectorizer.pkl")
 
-with open(MODEL_PATH, "rb") as f:
-    model = pickle.load(f)
-with open(VEC_PATH, "rb") as f:
-    vectorizer = pickle.load(f)
+# Load model & vectorizer at import time
+try:
+    with open(MODEL_PATH, "rb") as f:
+        model = pickle.load(f)
+    with open(VEC_PATH, "rb") as f:
+        vectorizer = pickle.load(f)
+    logger.info("Classifier and vectorizer loaded from %s", MODEL_DIR)
+except Exception as e:
+    logger.exception("Failed to load classifier/vectorizer from %s: %s", MODEL_DIR, str(e))
+    model, vectorizer = None, None
 
 def predict_document_type(text: str) -> str:
     """Classify OCR text into a document type."""
     if not text.strip():
+        logger.warning("predict_document_type called with empty text")
         return "unknown"
-    X = vectorizer.transform([text])
-    return model.predict(X)[0]
+
+    if not model or not vectorizer:
+        logger.error("predict_document_type failed: model/vectorizer not loaded")
+        return "unknown"
+
+    try:
+        logger.debug("Classifying text of length %d", len(text))
+        X = vectorizer.transform([text])
+        prediction = model.predict(X)[0]
+        logger.info("Predicted document type: %s", prediction)
+        return prediction
+    except Exception as e:
+        logger.exception("Classification failed: %s", str(e))
+        return "unknown"

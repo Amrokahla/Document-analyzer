@@ -2,3 +2,4 @@ venv/
 dummy.json
 __pycache__/
 data/
+logs/
