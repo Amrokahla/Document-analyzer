@@ -6,8 +6,6 @@ from backend.core.error_handlers import add_exception_handlers
 from backend.core.logging_config import configure_logging
 
 
-
-
 configure_logging()
 logger = logging.getLogger(__name__)
 
