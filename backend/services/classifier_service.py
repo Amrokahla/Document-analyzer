@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 
 # Paths (relative to project root)
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "model")
-MODEL_PATH = os.path.join(MODEL_DIR, "trained_model.pkl")
+MODEL_PATH = os.path.join(MODEL_DIR, "classifier_model.pkl")
 VEC_PATH = os.path.join(MODEL_DIR, "vectorizer.pkl")
 
 # Load model & vectorizer at import time
